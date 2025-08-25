@@ -4,6 +4,7 @@ namespace Domain.Models
 {
     public class User
     {
+        //user feilds
         public int Id { get; set; }
 
         [Required, MaxLength(25), MinLength(2)]
