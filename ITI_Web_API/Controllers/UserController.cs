@@ -15,7 +15,7 @@ namespace ITI_Web_API.Controllers
             _userServices = userServices;
         }
 
-        // GET: api/User
+        
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -23,7 +23,6 @@ namespace ITI_Web_API.Controllers
             return Ok(users);
         }
 
-        // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -38,7 +37,7 @@ namespace ITI_Web_API.Controllers
             }
         }
 
-        // POST: api/User
+      
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] User user)
         {
@@ -46,7 +45,7 @@ namespace ITI_Web_API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }
 
-        // PUT: api/User/5
+      
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] User user)
         {
@@ -64,7 +63,7 @@ namespace ITI_Web_API.Controllers
             }
         }
 
-        // DELETE: api/User/5
+       
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

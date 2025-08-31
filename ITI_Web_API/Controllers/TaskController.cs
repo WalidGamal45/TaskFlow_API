@@ -16,7 +16,6 @@ namespace ITI_Web_API.Controllers
             _taskServices = taskServices;
         }
 
-        // GET: api/Task
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -24,7 +23,7 @@ namespace ITI_Web_API.Controllers
             return Ok(tasks);
         }
 
-        // GET: api/Task/5
+     
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -39,7 +38,7 @@ namespace ITI_Web_API.Controllers
             }
         }
 
-        // POST: api/Task
+      
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Task1 task)
         {
@@ -47,7 +46,7 @@ namespace ITI_Web_API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
         }
 
-        // PUT: api/Task/5
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Task1 task)
         {
@@ -65,7 +64,7 @@ namespace ITI_Web_API.Controllers
             }
         }
 
-        // DELETE: api/Task/5
+      
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

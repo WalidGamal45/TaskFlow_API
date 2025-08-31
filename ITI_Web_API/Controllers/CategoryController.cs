@@ -15,7 +15,7 @@ namespace ITI_Web_API.Controllers
             _categoryServices = categoryServices;
         }
 
-        // GET: api/Category
+     
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -23,7 +23,7 @@ namespace ITI_Web_API.Controllers
             return Ok(categories);
         }
 
-        // GET: api/Category/5
+      
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -38,7 +38,7 @@ namespace ITI_Web_API.Controllers
             }
         }
 
-        // POST: api/Category
+       
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Category category)
         {
@@ -46,7 +46,7 @@ namespace ITI_Web_API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = category.Id }, category);
         }
 
-        // PUT: api/Category/5
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Category category)
         {
@@ -64,7 +64,7 @@ namespace ITI_Web_API.Controllers
             }
         }
 
-        // DELETE: api/Category/5
+       
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
