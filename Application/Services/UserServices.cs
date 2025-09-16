@@ -1,11 +1,12 @@
-﻿using Domain.Interfaces;
+﻿using Application.DTOs;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Services
 {
-    public class UserServices : IRepositoryTaskFlow<User>
+    public class UserServices : IRepositoryTaskFlow<User, UserDto>
     {
         private readonly DBContext _dbContext;
 
@@ -44,7 +45,7 @@ namespace Application.Services
             return user;
         }
 
-        public async Task UpdateAsync(User newEntity)
+        public async Task UpdateAsync(UserDto newEntity)
         {
             var oldEntity = await _dbContext.Users.FindAsync(newEntity.Id);
             if (oldEntity == null)

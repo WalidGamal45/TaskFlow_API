@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces;
+﻿using Application.DTOs;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class CategoryServices : IRepositoryTaskFlow<Category>
+    public class CategoryServices : IRepositoryTaskFlow<Category, CategoryDto>
     {
         private readonly DBContext _dbContext;
 
@@ -36,7 +37,7 @@ namespace Application.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Category newEntity)
+        public async Task UpdateAsync(CategoryDto newEntity)
         {
             var oldEntity = await _dbContext.Categories.FindAsync(newEntity.Id);
             if (oldEntity == null)

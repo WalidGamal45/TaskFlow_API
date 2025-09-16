@@ -1,11 +1,12 @@
-﻿using Domain.Interfaces;
+﻿using Application.DTOs;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Services
 {
-    public class TaskServices : IRepositoryTaskFlow<Task1>
+    public class TaskServices : IRepositoryTaskFlow<Task1,TaskDto>
     {
         private readonly DBContext _dbContext;
 
@@ -40,7 +41,7 @@ namespace Application.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Task1 newEntity)
+        public async Task UpdateAsync(TaskDto newEntity)
         {
             var oldEntity = await _dbContext.Tasks.FindAsync(newEntity.Id);
             if (oldEntity == null)
@@ -50,9 +51,6 @@ namespace Application.Services
             oldEntity.Description = newEntity.Description;
             oldEntity.Deadline = newEntity.Deadline;
             oldEntity.IsCompleted = newEntity.IsCompleted;
-            oldEntity.UserId = newEntity.UserId;
-            oldEntity.CategoryId = newEntity.CategoryId;
-
             await _dbContext.SaveChangesAsync();
         }
 

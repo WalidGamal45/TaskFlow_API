@@ -1,4 +1,5 @@
-﻿using Application.Services;
+﻿using Application.DTOs;
+using Application.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,7 +49,7 @@ namespace ITI_Web_API.Controllers
 
         
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Category category)
+        public async Task<IActionResult> Update(int id, [FromBody] CategoryDto category)
         {
             if (id != category.Id)
                 return BadRequest("Id mismatch.");
