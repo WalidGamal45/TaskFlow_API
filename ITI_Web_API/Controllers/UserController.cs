@@ -16,16 +16,17 @@ namespace ITI_Web_API.Controllers
             _userServices = userServices;
         }
 
-        
-        [HttpGet]
+
+        [HttpGet("all")]
         public async Task<IActionResult> GetAll()
         {
             var users = await _userServices.GetAllAsync();
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        // Route Parameter ------------------------------------------------
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById1([FromRoute] int id)
         {
             try
             {
@@ -38,15 +39,29 @@ namespace ITI_Web_API.Controllers
             }
         }
 
-      
+        // Query String ---------------------------------------------------
+        [HttpGet]
+        public async Task<IActionResult> GetById2([FromQuery] int id)
+        {
+            try
+            {
+                var user = await _userServices.GetByIdAsync(id);
+                return Ok(user);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] User user)
         {
             await _userServices.AddAsync(user);
-            return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
+            return CreatedAtAction(nameof(GetById2), new { id = user.Id }, user);
         }
 
-      
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UserDto user)
         {
@@ -64,7 +79,7 @@ namespace ITI_Web_API.Controllers
             }
         }
 
-       
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
