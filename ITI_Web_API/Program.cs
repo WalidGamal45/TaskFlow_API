@@ -1,6 +1,8 @@
 using Application.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Persistence;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,22 @@ builder.Services.AddScoped<TaskServices>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication(options => options.DefaultAuthenticateScheme = "MySchema")
+
+    .AddJwtBearer("MySchema", option =>
+    {
+        string Key = "Hello Wella 123 , wkkejlkflfpkfkfokfokop#";
+        var secretkey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key));
+
+        option.TokenValidationParameters = new TokenValidationParameters()
+        {
+            IssuerSigningKey = secretkey,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+
+        };
+    }
+    );
 
 var app = builder.Build();
 
